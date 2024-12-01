@@ -28,7 +28,7 @@
 				<ul>
 				
 					<li><a href="#intro">Welcome</a></li>
-					<li><a href="#one">Who is DrJavaSaurus?</a></li>
+					<li><a href="#one">Who is DrJavaSaurus</a></li>
 					<li><a href="#two">Projects</a></li>
 					<li><a href="#three">Contact</a></li>
 				</ul>
@@ -236,6 +236,31 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/projects.js"></script>
 	<script src="assets/js/main.js"></script>
+
+<script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener("DOMContentLoaded", () => {
+        // Select all navigation links with hash hrefs
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault(); // Prevent default jump
+                
+                // Get the target section
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Smooth scroll to the target section
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 
