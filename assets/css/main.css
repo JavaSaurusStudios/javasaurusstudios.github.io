@@ -3010,6 +3010,8 @@ input, select, textarea {
 				border-radius: 0;
 				display: block;
 				max-width: 110%;
+				max-height: 110%;
+				margin:auto;
 			}
 
 			.spotlights > section > .image:before {
