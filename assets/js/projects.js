@@ -15,8 +15,8 @@ fetch('data/projects.json')
 
             section.innerHTML = `
                 <span class="icon solid major fa-code"></span>
-                <img id="project-img" style="width:100%" src="${project.imgSrc}">
                 <h3 id="project-title">${project.title}</h3>
+                <img id="project-img" style="width:100%" src="${project.imgSrc}">
                 <p id="project-desc">${project.description}</p>
             `;
 
