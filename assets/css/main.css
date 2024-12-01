@@ -3009,6 +3009,7 @@ input, select, textarea {
 			.spotlights > section > .image img {
 				border-radius: 0;
 				display: block;
+				max-width: 110%;
 			}
 
 			.spotlights > section > .image:before {
