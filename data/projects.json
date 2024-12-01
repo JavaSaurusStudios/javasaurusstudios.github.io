@@ -1,17 +1,27 @@
 [
     {
-        "imgSrc": "https://img.itch.zone/aW1nLzE4NzI5MzMwLnBuZw==/315x250%23c/n5nH4B.png",
-        "title": "Chonky Ball Deluxe 1",
-        "description": "Chonky Ball Deluxe is a small game jam game created in 48 hours. The theme of the game was 'Creature Manager'. This game is a hybrid between a pinball game and a tamagotchi. Play Here!"
+        "imgSrc": "javasaurusstudios.github.io/data/games/chonkyball_deluxe.png",
+        "title": "Chonky Ball Deluxe",
+        "description": "Chonky Ball Deluxe is a small game jam game created in 48 hours. The theme of the game was 'Creature Manager', an entry for TobuJam 2.5. This game is a hybrid between a pinball game and a tamagotchi."
     },
     {
-        "imgSrc": "https://img.itch.zone/aW1nLzE4NzI5MzMwLnBuZw==/315x250%23c/n5nH4B.png",
-        "title": "Project 2",
-        "description": "Description for project 2. Play Here!"
+        "imgSrc": "javasaurusstudios.github.io/data/games/calamari_capsize.png",
+        "title": "Calamari Capsize",
+        "description": "Calamari Capsize is a prototype mobile game where the player controls a giant kraken that drags down and eats ships! The this game was made for Brackey's Jam 2023.2 (Diving Deeper). We actually got a game developer badge for this one on Twitch !"
     },
     {
-        "imgSrc": "https://img.itch.zone/aW1nLzE4NzI5MzMwLnBuZw==/315x250%23c/n5nH4B.png",
-        "title": "Project 3",
-        "description": "Description for project 3. Play Here!"
+        "imgSrc": "javasaurusstudios.github.io/data/games/air_stacky.png",
+        "title": "Air Stacky",
+        "description": "Air Stacky is a simple stacking game, made for TobuJam 2 and designed for mobile. The goal of the game is to stack the blocks has high as possible."
+    },
+    {
+        "imgSrc": "javasaurusstudios.github.io/data/games/excavatris.png",
+        "title": "Excavatris",
+        "description": "Excavatris is a mobile game that can be seen as an inverted Tetris style game. The goal is to use your spaceship to blast away dirt blocks, unlocking tetrominoes that get extracted. Excavatris was made for GMTK-Jam 2023"
+    },
+    {
+        "imgSrc": "javasaurusstudios.github.io/data/games/super_turtle_drop.png",
+        "title": "Super Turtle Drop",
+        "description": "Super Turtle Drop is a high paced action game. The player needs to escape descending drills by breaking crates as fast as possible, while being mindfull of how they fall down. Avoid getting crushed and reach a highscore ! Made for Ludum Dare 48"
     }
 ]
