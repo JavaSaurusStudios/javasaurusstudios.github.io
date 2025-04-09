@@ -28,6 +28,25 @@
 
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
+
+      function resizeCanvas() {
+  const aspectRatio = 9 / 16;
+  const windowRatio = window.innerWidth / window.innerHeight;
+
+  if (windowRatio > aspectRatio) {
+    // Window is wider than 9:16
+    canvas.style.height = "100vh";
+    canvas.style.width = (window.innerHeight * aspectRatio) + "px";
+  } else {
+    // Window is taller than 9:16
+    canvas.style.width = "100vw";
+    canvas.style.height = (window.innerWidth / aspectRatio) + "px";
+  }
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas(); // Call initially
+
+      
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var warningBanner = document.querySelector("#unity-warning");
