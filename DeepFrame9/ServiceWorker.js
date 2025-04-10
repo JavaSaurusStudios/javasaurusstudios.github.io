@@ -1,9 +1,9 @@
 const cacheName = "JavaSaurus Studios-DeepFrame 9-1.0";
 const contentToCache = [
-    "Build/Web5.loader.js",
-    "Build/Web5.framework.js",
-    "Build/Web5.data",
-    "Build/Web5.wasm",
+    "Build/Web6.loader.js",
+    "Build/Web6.framework.js",
+    "Build/Web6.data",
+    "Build/Web6.wasm",
     "TemplateData/style.css"
 
 ];
