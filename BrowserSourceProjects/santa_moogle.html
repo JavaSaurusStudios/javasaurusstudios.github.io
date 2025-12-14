@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Running Santa Overlay with Cartoon Speech</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  /* Container for horizontal movement */
+  #santa-container {
+    position: fixed;
+    bottom: -6%;
+    z-index: 1000;
+    pointer-events: none;
+    will-change: transform;
+    display: none;
+  }
+
+  /* Santa sprite */
+  #santa {
+    height: 192px;
+    width: 192px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    display: block;
+    animation: santaBop 0.5s ease-in-out infinite;
+  }
+
+  /* Ground shadow */
+  #shadow {
+    position: fixed;
+    bottom: -4.5%;
+    width: 192px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 70%);
+    z-index: 900;
+    pointer-events: none;
+    display: none;
+    will-change: transform, opacity;
+  }
+
+  /* Speech bubble */
+  #speech {
+    position: fixed;
+    padding: 10px 16px;
+    background: #d7d39c;           /* soft yellow */
+    color: #ffffff;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    border-radius: 20px;
+    font-family: "Comic Sans MS", "Comic Neue", sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1100;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,1));
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  /* Tail of the bubble */
+  #speech::after {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%) rotate(15deg);
+    border-width: 12px 12px 0 12px;
+    border-style: solid;
+    border-color: #fff8a0 transparent transparent transparent;
+  }
+
+  /* Santa bob animation */
+  @keyframes santaBop {
+    0%, 100% { transform: translateY(0); }
+    25% { transform: translateY(-4px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(2px); }
+  }
+
+  /* Speech bubble float */
+  @keyframes speechFloat {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-4px); }
+  }
+</style>
+</head>
+<body>
+  <div id="santa-container">
+    <img id="santa" src="HammyMoogle.png" alt="Santa Running">
+  </div>
+  <div id="shadow"></div>
+  <div id="speech"></div>
+
+  <script>
+ 
+    const container = document.getElementById("santa-container");
+    const santa = document.getElementById("santa");
+    const shadow = document.getElementById("shadow");
+    const speech = document.getElementById("speech");
+
+    let direction = 1;
+    const runDuration = 16000;
+    const minDelay = 8000;
+    const maxDelay = 18000;
+
+    // At the start of your script
+    function getURLPhrase() {
+        const params = new URLSearchParams(window.location.search);
+        const phrase = params.get("phrase");
+        return phrase ? decodeURIComponent(phrase) : null;
+    }
+
+    const phrases = [];
+    const urlPhrase = getURLPhrase();
+    if (urlPhrase) phrases.push(urlPhrase);
+    
+    // Show a speech bubble
+    function showSpeech() {
+      const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+      speech.textContent = phrase;
+      speech.style.opacity = 1;
+      speech.style.animation = "speechFloat 1s ease-in-out infinite";
+
+      setTimeout(() => {
+        speech.style.opacity = 0;
+        speech.style.animation = "";
+      }, 4000); // bubble visible for 4s
+    }
+
+    function runSanta() {
+      container.style.display = "block";
+      shadow.style.display = "block";
+
+      const screenWidth = window.innerWidth;
+      const santaWidth = container.offsetWidth || 192;
+
+      const startX = direction === 1 ? -santaWidth - 50 : screenWidth + santaWidth + 50;
+      const endX = direction === 1 ? screenWidth + santaWidth + 50 : -santaWidth - 50;
+
+      container.style.transition = "none";
+      shadow.style.transition = "none";
+      container.style.transform = `translateX(${startX}px) scaleX(${direction})`;
+      shadow.style.transform = `translateX(${startX}px) scaleX(${direction})`;
+      void container.offsetWidth;
+
+      container.style.transition = `transform ${runDuration / 1000}s linear`;
+      shadow.style.transition = `transform ${runDuration / 1000}s linear`;
+      container.style.transform = `translateX(${endX}px) scaleX(${direction})`;
+      shadow.style.transform = `translateX(${endX}px) scaleX(${direction})`;
+
+      // Update speech bubble position to follow Santa
+      const updateSpeech = () => {
+        const rect = container.getBoundingClientRect();
+        speech.style.left = `${rect.left + rect.width / 2}px`;
+        speech.style.top = `${rect.top - 50}px`;
+      };
+
+      const speechFollowInterval = setInterval(updateSpeech, 16);
+
+      // Randomly show speech bubbles mid-run
+      const speechRandomInterval = setInterval(() => {
+        if (Math.random() < 0.25) { // 25% chance per check
+          showSpeech();
+        }
+      }, 1500);
+
+      setTimeout(() => {
+        container.style.display = "none";
+        shadow.style.display = "none";
+        speech.style.opacity = 0;
+        direction *= -1;
+
+        clearInterval(speechFollowInterval);
+        clearInterval(speechRandomInterval);
+
+        const nextDelay = Math.random() * (maxDelay - minDelay) + minDelay;
+        setTimeout(runSanta, nextDelay);
+      }, runDuration);
+    }
+
+    setTimeout(runSanta, 3000 + Math.random() * 4000);
+  </script>
+</body>
+</html>
